@@ -21,8 +21,8 @@ For a simple Docker-based install of the Counterparty software stack, see [this 
 
 # Manual installation
 
-Download the latest [Bitcoin Core](https://github.com/bitcoin/bitcoin/releases) and create
-a `bitcoin.conf` file with the following options:
+Download the latest [XEP Core](https://github.com/ElectraProtocol/XEP-Core/releases) and create
+a `xep.conf` file with the following options:
 
 ```
 rpcuser=bitcoinrpc

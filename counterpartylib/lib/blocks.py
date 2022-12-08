@@ -366,10 +366,10 @@ def initialise(db):
         cursor.execute('''ALTER TABLE assets ADD COLUMN asset_longname TEXT''')
     cursor.execute('''CREATE UNIQUE INDEX IF NOT EXISTS asset_longname_idx ON assets(asset_longname)''')
 
-    cursor.execute('''SELECT * FROM assets WHERE asset_name = ?''', ('BTC',))
+    cursor.execute('''SELECT * FROM assets WHERE asset_name = ?''', ('XEP',))
     if not list(cursor):
-        cursor.execute('''INSERT INTO assets VALUES (?,?,?,?)''', ('0', 'BTC', None, None))
-        cursor.execute('''INSERT INTO assets VALUES (?,?,?,?)''', ('1', 'XCP', None, None))
+        cursor.execute('''INSERT INTO assets VALUES (?,?,?,?)''', ('0', 'XEP', None, None))
+        cursor.execute('''INSERT INTO assets VALUES (?,?,?,?)''', ('1', 'SEP', None, None))
 
     # Addresses
     # Leaving this here because in the future this could work for other things besides broadcast
@@ -1165,13 +1165,13 @@ def list_tx(db, block_hash, block_index, block_time, tx_hash, tx_index, tx_hex=N
 def kickstart(db, bitcoind_dir):
     if bitcoind_dir is None:
         if platform.system() == 'Darwin':
-            bitcoind_dir = os.path.expanduser('~/Library/Application Support/Bitcoin/')
+            bitcoind_dir = os.path.expanduser('~/Library/Application Support/XEP/')
         elif platform.system() == 'Windows':
-            bitcoind_dir = os.path.join(os.environ['APPDATA'], 'Bitcoin')
+            bitcoind_dir = os.path.join(os.environ['APPDATA'], 'XEP')
         else:
-            bitcoind_dir = os.path.expanduser('~/.bitcoin')
+            bitcoind_dir = os.path.expanduser('~/.xep')
     if not os.path.isdir(bitcoind_dir):
-        raise Exception('Bitcoin Core data directory not found at {}. Use --bitcoind-dir parameter.'.format(bitcoind_dir))
+        raise Exception('Xep Core data directory not found at {}. Use --bitcoind-dir parameter.'.format(bitcoind_dir))
 
     cursor = db.cursor()
 
